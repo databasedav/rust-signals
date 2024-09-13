@@ -566,6 +566,12 @@ pub trait SignalVecExt: SignalVec {
     }
 
     #[inline]
+    fn boxed_sync<'a>(self) -> Pin<Box<dyn SignalVec<Item = Self::Item> + Send + Sync + 'a>>
+        where Self: Sized + Send + Sync + 'a {
+        Box::pin(self)
+    }
+
+    #[inline]
     fn boxed_local<'a>(self) -> Pin<Box<dyn SignalVec<Item = Self::Item> + 'a>>
         where Self: Sized + 'a {
         Box::pin(self)

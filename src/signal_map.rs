@@ -160,6 +160,12 @@ pub trait SignalMapExt: SignalMap {
     }
 
     #[inline]
+    fn boxed_sync<'a>(self) -> Pin<Box<dyn SignalMap<Key = Self::Key, Value = Self::Value> + Send + Sync + 'a>>
+        where Self: Sized + Send + Sync + 'a {
+        Box::pin(self)
+    }
+
+    #[inline]
     fn boxed_local<'a>(self) -> Pin<Box<dyn SignalMap<Key = Self::Key, Value = Self::Value> + 'a>>
         where Self: Sized + 'a {
         Box::pin(self)
