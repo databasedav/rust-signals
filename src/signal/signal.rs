@@ -603,6 +603,9 @@ impl<T: ?Sized> SignalExt for T where T: Signal {}
 /// indirection.
 pub type BoxSignal<'a, T> = Pin<Box<dyn Signal<Item = T> + Send + 'a>>;
 
+/// Same as [`BoxSignal`], but with a `Sync` requirement.
+pub type SyncBoxSignal<'a, T> = Pin<Box<dyn Signal<Item = T> + Send + Sync + 'a>>;
+
 /// Same as [`BoxSignal`], but without the `Send` requirement.
 pub type LocalBoxSignal<'a, T> = Pin<Box<dyn Signal<Item = T> + 'a>>;
 

@@ -182,6 +182,9 @@ impl<T: ?Sized> SignalMapExt for T where T: SignalMap {}
 /// indirection.
 pub type BoxSignalMap<'a, Key, Value> = Pin<Box<dyn SignalMap<Key = Key, Value = Value> + Send + 'a>>;
 
+/// Same as [`BoxSignalMap`], but with a `Sync` requirement.
+pub type SyncBoxSignalMap<'a, Key, Value> = Pin<Box<dyn SignalMap<Key = Key, Value = Value> + Send + Sync + 'a>>;
+
 /// Same as [`BoxSignalMap`], but without the `Send` requirement.
 pub type LocalBoxSignalMap<'a, Key, Value> = Pin<Box<dyn SignalMap<Key = Key, Value = Value> + 'a>>;
 

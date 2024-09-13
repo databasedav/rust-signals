@@ -588,6 +588,9 @@ impl<T: ?Sized> SignalVecExt for T where T: SignalVec {}
 /// indirection.
 pub type BoxSignalVec<'a, T> = Pin<Box<dyn SignalVec<Item = T> + Send + 'a>>;
 
+/// Same as [`BoxSignalVec`], but with a `Sync` requirement.
+pub type SyncBoxSignalVec<'a, T> = Pin<Box<dyn SignalVec<Item = T> + Send + Sync + 'a>>;
+
 /// Same as [`BoxSignalVec`], but without the `Send` requirement.
 pub type LocalBoxSignalVec<'a, T> = Pin<Box<dyn SignalVec<Item = T> + 'a>>;
 
